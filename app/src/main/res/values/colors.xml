@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1d4a71</color>
+    <color name="colorPrimaryDark">#1d4a71</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="themeblue">#53b0be</color>
+    <color name="buttonblue">#9fdcc1</color>
+    <color name="colorwhite">#ffffff</color>
+
+    <!--constant colors-->
+    <color name="translucent">#487482a4</color>
+
+
+
+
+    <!--<color name="colorPrimary">#1eb8c2</color>-->
+    <!--<color name="colorPrimaryDark">#1b92ac</color>-->
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <!--<color name="themeblue">#4db5ba</color>-->
+    <!--<color name="buttonblue">#34bac6</color>-->
+    <!--<color name="colorwhite">#ffffff</color>-->
+</resources>
