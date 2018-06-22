@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/plateno"
+        android:id="@+id/tickcode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -70,15 +70,4 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/book"
-        style="@android:style/Widget.Button.Small"
-        android:layout_width="wrap_content"
-
-        android:layout_height="30dp"
-        android:layout_gravity="right"
-        android:background="@drawable/textshape"
-        android:text="Book"
-        android:textColor="@color/textblue"
-        android:textStyle="bold" />
 </LinearLayout>

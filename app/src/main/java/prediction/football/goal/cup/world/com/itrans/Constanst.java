@@ -14,6 +14,7 @@ public class Constanst {
     public static String STATIONB=BASEURL+"itrans/Welcome/getStationB";
     public static String TIMES=BASEURL+"itrans/Welcome/getTime";
     public static String BOOKURL=BASEURL+"itrans/Welcome/bookBus";
+    public static String HISTORYBOOKING=BASEURL+"itrans/Welcome/historyBooking";
 
 
 

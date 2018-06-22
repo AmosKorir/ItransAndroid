@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutionException;
@@ -85,6 +86,7 @@ public class Booking extends AppCompatActivity {
         UserHelper helper=new UserHelper();
         user=helper.execute(userdata).get();
          userid=userdata;
+        Toast.makeText(ctx, userid, Toast.LENGTH_SHORT).show();
         //make booking connection;
         String url=BOOKURL+"/"+allocationid+"/"+userid+"/"+lastseat+"/"+lastamount+"/"+date;
         numbers.setText(url);
@@ -106,9 +108,8 @@ public class Booking extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //process the date to match the database format
-                String s = datePicker.getYear() + "-" + datePicker.getMonth() + "-" + datePicker.getDayOfMonth();
-                SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
-                s=dateFormat.format(s).toString();
+                String s = datePicker.getYear() + "-" + getDigit(datePicker.getMonth()+1) + "-" + getDigit(datePicker.getDayOfMonth());
+
                 datebtn.setText(s);
                 datedialog.dismiss();
 
@@ -137,4 +138,14 @@ public class Booking extends AppCompatActivity {
         dialog.show();
     }
 
+    //method to format date to have 0 at the begining if less than ten
+
+    public String getDigit(int digit){
+        if(digit<10){
+            return "0"+digit;
+        }
+        else {
+            return digit+"";
+        }
+    }
 }

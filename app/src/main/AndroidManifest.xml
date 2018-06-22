@@ -15,20 +15,48 @@
             android:name=".Main"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Login" />
-        <activity android:name=".Register" />
-        <activity android:name=".Booking"
-            android:theme="@style/Theme.Transparent"></activity>
+        <activity
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".Login" />
+
+
+
+        <activity
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".Register" />
+        <activity
+            android:name=".Booking"
+            android:theme="@style/Theme.Transparent" />
+
+        <activity
+            android:name=".HistoryBooking"
+            android:label="@string/title_activity_history_booking"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+
+        <activity
+
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".Splash"
+            >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

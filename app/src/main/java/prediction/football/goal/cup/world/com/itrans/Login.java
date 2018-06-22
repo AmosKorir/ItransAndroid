@@ -72,7 +72,7 @@ public class Login extends AppCompatActivity {
 
                         try {
                             output = direconection.execute(LOGINURL+"/"+phonestr +"/"+passwordstr).get();
-                            Toast.makeText(Login.this, output, Toast.LENGTH_SHORT).show();
+
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         } catch (ExecutionException e) {
@@ -87,6 +87,8 @@ public class Login extends AppCompatActivity {
                     SharedPreferences preferences=getSharedPreferences("login",MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putString("user",output);
+                            Toast.makeText(Login.this, output, Toast.LENGTH_SHORT).show();
+                    editor.commit();
                     startActivity(new Intent(Login.this,Main.class));
 
                         }

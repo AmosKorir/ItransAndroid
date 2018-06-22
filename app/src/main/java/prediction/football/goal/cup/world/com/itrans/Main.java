@@ -270,7 +270,7 @@ public class Main extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            startActivity(new Intent(Main.this,HistoryBooking.class));
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -309,7 +309,8 @@ public class Main extends AppCompatActivity
 
     }
 
-    //method to create dialog for booking
+    //method to create dialog for booking t
+//    the following method is no longer in use.
 
     public static void createBook(final Context ctx, String allocationid, int fare){
         final Dialog dialog=new Dialog(ctx);

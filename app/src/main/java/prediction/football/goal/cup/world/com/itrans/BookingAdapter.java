@@ -1,5 +1,6 @@
 package prediction.football.goal.cup.world.com.itrans;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,12 +15,12 @@ import java.util.ArrayList;
 
 import static prediction.football.goal.cup.world.com.itrans.Main.createBook;
 
-public class CustomAdapter extends ArrayAdapter<Model>{
+public class BookingAdapter extends ArrayAdapter<Ticket>{
     Context ctx;
     int resource;
-    ArrayList<Model> arrayList;
+    ArrayList<Ticket> arrayList;
     LayoutInflater layoutInflater;
-    public CustomAdapter( Context context, int resource,  ArrayList<Model> objects) {
+    public BookingAdapter( Context context, int resource,  ArrayList<Ticket> objects) {
 
         super(context, resource, objects);
         ViewHolder viewHolder;
@@ -34,62 +35,47 @@ public class CustomAdapter extends ArrayAdapter<Model>{
 
     @Override
     public View getView(final int position, View itemview, ViewGroup parent) {
-        ViewHolder viewHolder;
+        BookingHolder viewHolder;
         Button book;
-        Model model= arrayList.get(position);
+       Ticket model= arrayList.get(position);
 
         final String allocationid;
         final int fare;
 
         if (itemview == null) {
-            viewHolder = new ViewHolder();
+           viewHolder = new BookingHolder();
 
 
             itemview = layoutInflater.inflate(resource, parent, false);
-            viewHolder.plate=(TextView)itemview.findViewById(R.id.plateno);
+            viewHolder.ticketcode=(TextView)itemview.findViewById(R.id.tickcode);
             viewHolder.stationA=(TextView)itemview.findViewById(R.id.stationa);
             viewHolder.StationB=(TextView)itemview.findViewById(R.id.stationb);
             viewHolder.time=(TextView)itemview.findViewById(R.id.time);
             viewHolder.fare=(TextView)itemview.findViewById(R.id.fare);
 
 
-            viewHolder.plate.setText(model.getPlateno());
-            viewHolder.stationA.setText(model.getStartionA());
+            viewHolder.ticketcode.setText(model.getTicketcode());
+            viewHolder.stationA.setText(model.getStationA());
             viewHolder.StationB.setText(model.getStartionB());
             viewHolder.time.setText(model.getTime());
-            fare=model.getFare();
-            viewHolder.fare.setText(fare+"");
+            viewHolder.fare.setText(model.getAmount());
 
             allocationid=model.getAllocationid();
 
-            book=(Button)itemview.findViewById(R.id.book);
-            book.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                   getContext().startActivity(new Intent(getContext(),Booking.class).putExtra("allocationid",allocationid).putExtra("fare",fare));
-                }
-            });
 
             itemview.setTag(viewHolder);
         }else{
-            viewHolder=(ViewHolder)itemview.getTag();
-            viewHolder.plate.setText(model.getPlateno());
-            viewHolder.stationA.setText(model.getStartionA());
+
+            viewHolder=(BookingHolder)itemview.getTag();
+
+            viewHolder.ticketcode.setText(model.getTicketcode());
+            viewHolder.stationA.setText(model.getStationA());
             viewHolder.StationB.setText(model.getStartionB());
             viewHolder.time.setText(model.getTime());
-
-            fare=model.getFare();
-            viewHolder.fare.setText(fare+"");
+            viewHolder.fare.setText(model.getAmount());
             allocationid=model.getAllocationid();
 
-            book=(Button)itemview.findViewById(R.id.book);
-            book.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    getContext().startActivity(new Intent(getContext(),Booking.class).putExtra("allocationid",allocationid).putExtra("fare",fare));
-                }
-            });
         }
 
 

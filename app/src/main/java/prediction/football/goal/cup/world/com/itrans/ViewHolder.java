@@ -12,6 +12,7 @@ public class ViewHolder {
     public TextView stationA;
     public TextView StationB;
     public TextView time;
+    public TextView fare;
 
 
 
