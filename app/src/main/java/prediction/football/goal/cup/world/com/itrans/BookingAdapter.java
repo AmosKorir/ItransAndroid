@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static prediction.football.goal.cup.world.com.itrans.HistoryBooking.createDialog;
 import static prediction.football.goal.cup.world.com.itrans.Main.createBook;
+import static prediction.football.goal.cup.world.com.itrans.Splash.getUserId;
 
 public class BookingAdapter extends ArrayAdapter<Ticket>{
     Context ctx;
@@ -37,7 +39,7 @@ public class BookingAdapter extends ArrayAdapter<Ticket>{
     public View getView(final int position, View itemview, ViewGroup parent) {
         BookingHolder viewHolder;
         Button book;
-       Ticket model= arrayList.get(position);
+       final Ticket model= arrayList.get(position);
 
         final String allocationid;
         final int fare;
@@ -52,6 +54,7 @@ public class BookingAdapter extends ArrayAdapter<Ticket>{
             viewHolder.StationB=(TextView)itemview.findViewById(R.id.stationb);
             viewHolder.time=(TextView)itemview.findViewById(R.id.time);
             viewHolder.fare=(TextView)itemview.findViewById(R.id.fare);
+            viewHolder.cancel=(Button)itemview.findViewById(R.id.cancel);
 
 
             viewHolder.ticketcode.setText(model.getTicketcode());
@@ -61,6 +64,20 @@ public class BookingAdapter extends ArrayAdapter<Ticket>{
             viewHolder.fare.setText(model.getAmount());
 
             allocationid=model.getAllocationid();
+
+            viewHolder.cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String ticketcode,allocationid,userid,amount,nseat,date;
+                    ticketcode=model.getTicketcode();
+                    allocationid=model.getAllocationid();
+                    userid=getUserId(getContext());
+                    amount=model.getAmount();
+                    nseat=model.getSeats();
+                    date=model.getDate();
+                    createDialog(getContext(),ticketcode,allocationid,userid,amount,nseat,date);
+                }
+            });
 
 
             itemview.setTag(viewHolder);
@@ -74,6 +91,21 @@ public class BookingAdapter extends ArrayAdapter<Ticket>{
             viewHolder.time.setText(model.getTime());
             viewHolder.fare.setText(model.getAmount());
             allocationid=model.getAllocationid();
+
+            viewHolder.cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String ticketcode,allocationid,userid,amount,nseat,date;
+                    ticketcode=model.getTicketcode();
+                    allocationid=model.getAllocationid();
+                    userid=getUserId(getContext());
+                    amount=model.getAmount();
+                    nseat=model.getSeats();
+                    date=model.getDate();
+                    createDialog(getContext(),ticketcode,allocationid,userid,amount,nseat,date);
+                }
+            });
+
 
 
         }

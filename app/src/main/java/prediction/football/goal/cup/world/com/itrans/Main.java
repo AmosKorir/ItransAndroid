@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.ContextThemeWrapper;
@@ -25,11 +26,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import static prediction.football.goal.cup.world.com.itrans.Constanst.BALANCE;
 import static prediction.football.goal.cup.world.com.itrans.Constanst.BOOKURL;
 import static prediction.football.goal.cup.world.com.itrans.Constanst.BUSDEFAULT;
 import static prediction.football.goal.cup.world.com.itrans.Constanst.BUSES;
@@ -55,9 +58,10 @@ public class Main extends AppCompatActivity
 
     //booking data
     String date;
-
+    String userid;
+    String balance;
     static Button datebtn;
-
+    TextView BalanceText;
 
 
     @Override
@@ -71,11 +75,16 @@ public class Main extends AppCompatActivity
        spinnerFrom=(Spinner)findViewById(R.id.spinnerfrom);
        spinnerTo=(Spinner)findViewById(R.id.spinnerto);
        spinnerTime=(Spinner)findViewById(R.id.spinnertime);
+       BalanceText=(TextView)findViewById(R.id.balance);
 
 
+        SharedPreferences sharedPreferences= getSharedPreferences("login",MODE_PRIVATE);
+        userid=sharedPreferences.getString("user",null);
 
 
+        /*run the method to get the balance*/
 
+        getBalance(userid);
 
 
 
@@ -256,7 +265,8 @@ public class Main extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.logout) {
+            logout();
             return true;
         }
 
@@ -370,8 +380,36 @@ public class Main extends AppCompatActivity
         dialog.show();
     }
 
+    //method to the balance of the customer
+    private void getBalance(final String userid){
+        Runnable runnable=new Runnable() {
+            @Override
+            public void run() {
+                Connection balanceConnection=new Connection();
+                try {
+                    balance= balanceConnection.execute(BALANCE+userid).get();
+                    BalanceText.setText("Balance"+ ":"+balance);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        Handler handler=new Handler();
+        handler.post(runnable);
+    }
 
 
+    /*method to logout*/
+    public void logout(){
+        SharedPreferences preferences=getSharedPreferences("login",MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("user","");
+        editor.commit();
+        startActivity(new Intent(Main.this,Login.class));
+        finish();
+    }
 
 
 

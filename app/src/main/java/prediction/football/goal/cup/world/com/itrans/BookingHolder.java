@@ -1,5 +1,6 @@
 package prediction.football.goal.cup.world.com.itrans;
 
+import android.widget.Button;
 import android.widget.TextView;
 
 public class BookingHolder {
@@ -9,4 +10,6 @@ public class BookingHolder {
     public TextView StationB;
     public TextView time;
     public TextView fare;
+
+    public Button cancel;
 }

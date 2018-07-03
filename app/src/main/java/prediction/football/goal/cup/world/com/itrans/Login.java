@@ -1,5 +1,6 @@
 package prediction.football.goal.cup.world.com.itrans;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ public class Login extends AppCompatActivity {
     EditText phone,password;
 
     String passwordstr,phonestr;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class Login extends AppCompatActivity {
                 getInput();
             }
         });
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Please wait....");
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,11 +64,14 @@ public class Login extends AppCompatActivity {
 
 
         if(!passwordstr.isEmpty() && !phonestr.isEmpty()){
+            progressDialog=new ProgressDialog(this);
+            progressDialog.setMessage("Please wait....");
 
 
 
 
-                Runnable runnable=new Runnable() {
+
+            Runnable runnable=new Runnable() {
                     @Override
                     public void run() {
                         Connection direconection=new Connection();
@@ -80,14 +87,14 @@ public class Login extends AppCompatActivity {
                         }
 
                         if(output.equals("no")){
+                            progressDialog.dismiss();
                             //Toast.makeText(this, "Please Check your credentials", Toast.LENGTH_SHORT).show();
                         }else{
                            // Toast.makeText(this, output, Toast.LENGTH_SHORT).show();
-//
+                            progressDialog.dismiss();
                     SharedPreferences preferences=getSharedPreferences("login",MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putString("user",output);
-                            Toast.makeText(Login.this, output, Toast.LENGTH_SHORT).show();
                     editor.commit();
                     startActivity(new Intent(Login.this,Main.class));
 

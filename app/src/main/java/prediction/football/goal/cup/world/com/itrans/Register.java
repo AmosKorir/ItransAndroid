@@ -57,7 +57,9 @@ public class Register extends AppCompatActivity {
 
                     String output=direconection.execute(REGISTERURL+"/"+phonestr+"/"+userstr+"/"+passwordstr +"/"+emailstr).get();
 
-                    username.setText(output);Toast.makeText(this, output, Toast.LENGTH_SHORT).show();
+                    username.setText(output);
+                    Toast.makeText(this, output, Toast.LENGTH_SHORT).show();
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/textshape"
         android:orientation="vertical"
         android:padding="10dp"
         android:paddingBottom="10dp">
@@ -30,7 +30,8 @@
             android:id="@+id/datebtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/textshape"
             android:text="Date" />
 
         <TextView
@@ -39,7 +40,6 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:text="Enter number of seats"
-            android:textColor="@android:color/white"
             android:textSize="24sp" />
 
         <EditText
@@ -62,17 +62,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@android:color/black"
+                android:background="@drawable/black"
                 android:text="Cancel"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/textblue" />
 
             <Button
                 android:id="@+id/confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
-                android:text="confirm" />
+                android:background="@drawable/redbutton"
+                android:text="confirm"
+                android:textColor="@color/colorwhite" />
         </LinearLayout>
     </LinearLayout>
 
