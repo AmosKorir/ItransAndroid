@@ -100,7 +100,7 @@ public class Main extends AppCompatActivity
             stationB=connectionB.execute(STATIONB).get();
             Times=connectionT.execute(TIMES).get();
 
-            Toast.makeText(this, jsonarray+"", Toast.LENGTH_SHORT).show();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
             Toast.makeText(this, e+"", Toast.LENGTH_SHORT).show();
@@ -283,14 +283,6 @@ public class Main extends AppCompatActivity
             startActivity(new Intent(Main.this,HistoryBooking.class));
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -301,21 +293,31 @@ public class Main extends AppCompatActivity
     //method to refesh an fetch the list
 
     public void fetch(){
-//        Connection connection=new Connection();
-//        String current;
-//        try {
-//            current=connection.execute(BUSES+"/"+selectFrom+"/"+selectTo+"/"+selectTime).get();
-//            ModelHelper modelHelper=new ModelHelper();
-//            Toast.makeText(this, current+"", Toast.LENGTH_SHORT).show();
-//            arrayList=new ArrayList(modelHelper.execute(current).get());
-//
-//            adaptern=new CustomAdapter(Main.this,R.layout.item,arrayList);
-//            listView.setAdapter(adaptern);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
+        Runnable runnable=new Runnable() {
+            @Override
+            public void run() {
+
+
+        Connection connection=new Connection();
+        String current;
+        try {
+            current=connection.execute(BUSES+"/"+selectFrom+"/"+selectTo+"/"+selectTime).get();
+            ModelHelper modelHelper=new ModelHelper();
+
+            arrayList=new ArrayList(modelHelper.execute(current).get());
+
+            adaptern=new CustomAdapter(Main.this,R.layout.item,arrayList);
+            listView.setAdapter(adaptern);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+            }
+        };
+        Handler handler=new Handler();
+        handler.post(runnable);
 
     }
 

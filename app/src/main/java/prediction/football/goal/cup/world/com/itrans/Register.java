@@ -1,5 +1,6 @@
 package prediction.football.goal.cup.world.com.itrans;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -57,8 +58,16 @@ public class Register extends AppCompatActivity {
 
                     String output=direconection.execute(REGISTERURL+"/"+phonestr+"/"+userstr+"/"+passwordstr +"/"+emailstr).get();
 
-                    username.setText(output);
+
                     Toast.makeText(this, output, Toast.LENGTH_SHORT).show();
+                    if (output.equals("successfull")){
+                        finish();
+                    } else  if(output.equals("unsuccessfull")){
+                        Toast.makeText(this, "User with the same number exist", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(this, "Sorry an error was encountered", Toast.LENGTH_SHORT).show();
+                    }
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();

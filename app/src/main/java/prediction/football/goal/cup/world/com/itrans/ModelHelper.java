@@ -23,7 +23,7 @@ public class ModelHelper extends AsyncTask<String, Void, ArrayList> {
                 model.setPlateno(cobject.getString("plateno"));
                 model.setStartionA(cobject.getString("stationA"));
                 model.setStartionB(cobject.getString("StationB"));
-                model.setAllocationid(cobject.getString("allocationid"));
+                model.setAllocationid(cobject.getString("id"));
                 model.setFare(cobject.getInt("fare"));
                 model.setTime(cobject.getString("startA"));
                 myarraylist.add(model);

@@ -22,7 +22,7 @@ public class Booking extends AppCompatActivity {
     EditText  numbers;
 
     String allocationid,date;
-    int nseats,fare;
+    int nseats=0,fare;
     Context context;
 
     @Override
@@ -57,17 +57,25 @@ public class Booking extends AppCompatActivity {
             public void onClick(View v) {
                 date=datebtn.getText().toString();
 
-            nseats= Integer.parseInt(numbers.getText().toString());
+                if(date.toUpperCase().equals("DATE")){
+                    Toast.makeText(context, "Please enter date", Toast.LENGTH_SHORT).show();
+                }else {
+                try {
+                    nseats = Integer.parseInt(numbers.getText().toString());
+                }catch (Exception e){ e.printStackTrace();}
+                if(nseats>0){
                 try {
                     book(context,allocationid,fare,nseats,date);
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                }}else {
+                    Toast.makeText(context, "Please enter the number of seats", Toast.LENGTH_SHORT).show();
                 }
 
 
-            }
+            }}
         });
 
     }
@@ -86,10 +94,10 @@ public class Booking extends AppCompatActivity {
         UserHelper helper=new UserHelper();
         user=helper.execute(userdata).get();
          userid=userdata;
-        Toast.makeText(ctx, userid, Toast.LENGTH_SHORT).show();
+
         //make booking connection;
         String url=BOOKURL+"/"+allocationid+"/"+userid+"/"+lastseat+"/"+lastamount+"/"+date;
-        numbers.setText(url);
+
         Connection connection=new Connection();
         connection.execute(url);
 
@@ -119,24 +127,7 @@ public class Booking extends AppCompatActivity {
     }
 
 
-    public static void createDate(Context ctx){
-        Dialog dialog=new Dialog(ctx);
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialoglayout);
-        dialog.setCancelable(true);
 
-        final DatePicker datePicker=(DatePicker)dialog.findViewById(R.id.datepicker);
-        Button ok=(Button)dialog.findViewById(R.id.okbtn);
-//        ok.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String s = datePicker.getYear() + "-" + datePicker.getMonth() + "-" + datePicker.getDayOfMonth();
-//                datebtn.setText(s);
-//
-//            }
-//        });
-        dialog.show();
-    }
 
     //method to format date to have 0 at the begining if less than ten
 
