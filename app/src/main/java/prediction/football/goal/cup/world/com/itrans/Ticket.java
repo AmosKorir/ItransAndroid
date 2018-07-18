@@ -9,6 +9,15 @@ public class Ticket {
     String stationA;
     String startionB;
     String time;
+    String plate;
+
+    public String getPlate() {
+        return plate;
+    }
+
+    public void setPlate(String plate) {
+        this.plate = plate;
+    }
 
     public String getAllocationid() {
         return allocationid;

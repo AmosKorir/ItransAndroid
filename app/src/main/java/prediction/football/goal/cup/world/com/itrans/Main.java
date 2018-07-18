@@ -42,6 +42,7 @@ import static prediction.football.goal.cup.world.com.itrans.Constanst.TIMES;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
     ListView listView;
     ArrayList<Model> arrayList;
     String jsonarray="[]",stationA,stationB,Times;
@@ -78,20 +79,25 @@ public class Main extends AppCompatActivity
        BalanceText=(TextView)findViewById(R.id.balance);
 
 
-        SharedPreferences sharedPreferences= getSharedPreferences("login",MODE_PRIVATE);
-        userid=sharedPreferences.getString("user",null);
+
 
 
         /*run the method to get the balance*/
 
-        getBalance(userid);
+
+        try {
+            SharedPreferences sharedPreferences= getSharedPreferences("login",MODE_PRIVATE);
+            userid=sharedPreferences.getString("user",null);
 
 
+            connection = new Connection();
+            connectionA = new Connection();
+            connectionB = new Connection();
+            connectionT = new Connection();
+            getBalance(userid);
+        }catch (Exception e){
 
-        connection=new Connection();
-        connectionA=new Connection();
-        connectionB=new Connection();
-        connectionT=new Connection();
+        }
 
         try {
 
@@ -282,13 +288,30 @@ public class Main extends AppCompatActivity
         if (id == R.id.nav_camera) {
             startActivity(new Intent(Main.this,HistoryBooking.class));
         } else if (id == R.id.nav_gallery) {
-
+            startActivity(new Intent(Main.this,Account.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    //method to check if the userdata exist
+    public void checkuser(){
+        Connection check=new Connection();
+        try {
+            String user=check.execute().get();
+            if (user.equals("needed")){
+                startActivity(new Intent(Main.this,Details.class));
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     //method to refesh an fetch the list
 

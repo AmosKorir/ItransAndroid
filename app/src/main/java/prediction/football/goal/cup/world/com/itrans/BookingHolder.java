@@ -10,6 +10,7 @@ public class BookingHolder {
     public TextView StationB;
     public TextView time;
     public TextView fare;
+    public TextView date;
 
     public Button cancel;
 }

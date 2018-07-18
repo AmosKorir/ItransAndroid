@@ -68,7 +68,7 @@ public class Login extends AppCompatActivity {
             progressDialog.setMessage("Please wait....");
 
 
-
+            progressDialog.show();
 
 
             Runnable runnable=new Runnable() {
@@ -97,6 +97,7 @@ public class Login extends AppCompatActivity {
                     editor.putString("user",output);
                     editor.commit();
                     startActivity(new Intent(Login.this,Main.class));
+                    finish();
 
                         }
 

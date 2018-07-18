@@ -45,7 +45,6 @@ public class Booking extends AppCompatActivity {
                 createDialog();
             }
         });
-
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +61,9 @@ public class Booking extends AppCompatActivity {
                 }else {
                 try {
                     nseats = Integer.parseInt(numbers.getText().toString());
-                }catch (Exception e){ e.printStackTrace();}
+                }catch (Exception e){ e.printStackTrace();
+                nseats=0;
+                }
                 if(nseats>0){
                 try {
                     book(context,allocationid,fare,nseats,date);
@@ -97,11 +98,13 @@ public class Booking extends AppCompatActivity {
 
         //make booking connection;
         String url=BOOKURL+"/"+allocationid+"/"+userid+"/"+lastseat+"/"+lastamount+"/"+date;
+            numbers.setText("");
 
         Connection connection=new Connection();
-        connection.execute(url);
+        String result=connection.execute(url).get();
+        Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
 
-
+            resultRespond(result);
     }
 
     //method to create the dialog
@@ -111,6 +114,7 @@ public class Booking extends AppCompatActivity {
         datedialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         datedialog.setContentView(R.layout.datedialog);
         final DatePicker datePicker=(DatePicker)datedialog.findViewById(R.id.datepicker);
+        datePicker.setMinDate(System.currentTimeMillis()-1000);
         Button ok=(Button)datedialog.findViewById(R.id.okbtn);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +128,19 @@ public class Booking extends AppCompatActivity {
             }
         });
         datedialog.show();;
+    }
+
+//    create result dialog
+
+    public void resultRespond(String type){
+        final Dialog datedialog=new Dialog(this);
+        datedialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        if (type.equals("yes")){
+            datedialog.setContentView(R.layout.success);
+        }else{
+            datedialog.setContentView(R.layout.fail);
+        }
+        datedialog.show();
     }
 
 

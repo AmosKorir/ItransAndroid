@@ -40,21 +40,7 @@ public class HistoryBooking extends AppCompatActivity {
         context=HistoryBooking.this;
         userid=getUserId(context);
 
-        connection=new Connection();
-        try {
-            jsonString=connection.execute(HISTORYBOOKING+"/"+userid).get();
-            Toast.makeText(this, jsonString, Toast.LENGTH_SHORT).show();
-            arrayList=new ArrayList<Ticket>(new BookingHelper().execute(jsonString).get());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        BookingAdapter adapter=new BookingAdapter(this,R.layout.tickecitem,arrayList);
-        listView.setAdapter(adapter);
-
-
+            fetchData();
 
 
         //
@@ -63,15 +49,16 @@ public class HistoryBooking extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Data refreshed", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                fetchData();
             }
         });
     }
 
     //create cancel dialog
 
-    public static  void createDialog(final Context c, final String ticketcode, final String allocationid, final String userid, final String amount, final String seats, final String date){
+    public  void createDialog(final Context c, final String ticketcode, final String allocationid, final String userid, final String amount, final String seats, final String date){
         final Dialog dialog=new Dialog(c);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.confirmdelete);
@@ -88,7 +75,10 @@ public class HistoryBooking extends AppCompatActivity {
                Connection connection=new Connection();
                connection.execute(CANCELURL+ticketcode+"/"+allocationid+"/"+userid+"/"+amount+"/"+seats+"/"+date);
                 Toast.makeText(c, CANCELURL+ticketcode+"/"+allocationid+"/"+userid+"/"+amount+"/"+seats+"/"+date, Toast.LENGTH_SHORT).show();
-               dialog.dismiss();
+                dialog.dismiss();
+                fetchData();
+
+               
 
             }
         });
@@ -99,6 +89,24 @@ public class HistoryBooking extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+    }
+
+    public  void fetchData(){
+        connection=new Connection();
+        try {
+            jsonString=connection.execute(HISTORYBOOKING+"/"+userid).get();
+
+            arrayList=new ArrayList<Ticket>(new BookingHelper().execute(jsonString).get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        BookingAdapter adapter=new BookingAdapter(this,R.layout.tickecitem,arrayList);
+        listView.setAdapter(adapter);
+
+
     }
 
 }

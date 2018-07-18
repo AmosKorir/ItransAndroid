@@ -14,49 +14,38 @@
         <activity
             android:name=".Main"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".Login"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:name=".Login" />
-
-
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".Register"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:name=".Register" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Booking"
             android:theme="@style/Theme.Transparent" />
-
         <activity
             android:name=".HistoryBooking"
             android:label="@string/title_activity_history_booking"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
-
         <activity
-
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
             android:name=".Splash"
-            >
-
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".Details" />
+        <activity android:name=".Account"></activity>
     </application>
 
 </manifest>

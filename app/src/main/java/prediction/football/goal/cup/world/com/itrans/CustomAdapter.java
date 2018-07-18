@@ -62,6 +62,7 @@ public class CustomAdapter extends ArrayAdapter<Model>{
 
             allocationid=model.getAllocationid();
 
+
             book=(Button)itemview.findViewById(R.id.book);
             book.setOnClickListener(new View.OnClickListener() {
                 @Override

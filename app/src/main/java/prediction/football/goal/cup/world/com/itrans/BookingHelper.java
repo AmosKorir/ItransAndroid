@@ -29,6 +29,8 @@ public class BookingHelper extends AsyncTask<String, Void, ArrayList> {
                 model.setAmount(cobject.getString("amount"));
                 model.setTime(cobject.getString("startA"));
                 model.setDate(cobject.getString("date"));
+                model.setPlate(cobject.getString("plateno"));
+
                 myarraylist.add(model);
             }
 
