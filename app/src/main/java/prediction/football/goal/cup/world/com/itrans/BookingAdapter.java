@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static prediction.football.goal.cup.world.com.itrans.HistoryBooking.createDialog;
 import static prediction.football.goal.cup.world.com.itrans.Main.createBook;
 import static prediction.football.goal.cup.world.com.itrans.Splash.getUserId;
 
@@ -78,7 +79,7 @@ public class BookingAdapter extends ArrayAdapter<Ticket>{
                     amount=model.getAmount();
                     nseat=model.getSeats();
                     date=model.getDate();
-                    //createDialog(getContext(),ticketcode,allocationid,userid,amount,nseat,date);
+                    createDialog(getContext(),ticketcode,allocationid,userid,amount,nseat,date);
                 }
             });
 
@@ -107,7 +108,7 @@ public class BookingAdapter extends ArrayAdapter<Ticket>{
                     amount=model.getAmount();
                     nseat=model.getSeats();
                     date=model.getDate();
-                    //createDialog(getContext(),ticketcode,allocationid,userid,amount,nseat,date);
+                    createDialog(getContext(),ticketcode,allocationid,userid,amount,nseat,date);
                 }
             });
 

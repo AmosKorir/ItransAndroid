@@ -23,6 +23,7 @@ public class Constanst {
     //balance
     public static String BALANCE=BASEURL+"/Welcome/currentBalance/";
 
+    public static  String PAYMENT=BASEURL+"/Welcome/addBalance/";
 
 
 }

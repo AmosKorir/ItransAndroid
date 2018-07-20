@@ -36,6 +36,7 @@ import static prediction.football.goal.cup.world.com.itrans.Constanst.BALANCE;
 import static prediction.football.goal.cup.world.com.itrans.Constanst.BOOKURL;
 import static prediction.football.goal.cup.world.com.itrans.Constanst.BUSDEFAULT;
 import static prediction.football.goal.cup.world.com.itrans.Constanst.BUSES;
+import static prediction.football.goal.cup.world.com.itrans.Constanst.PAYMENT;
 import static prediction.football.goal.cup.world.com.itrans.Constanst.STATIONA;
 import static prediction.football.goal.cup.world.com.itrans.Constanst.STATIONB;
 import static prediction.football.goal.cup.world.com.itrans.Constanst.TIMES;
@@ -228,9 +229,7 @@ public class Main extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                startActivity(new Intent(Main.this,Login.class));
+               simulatePayment();
             }
         });
 
@@ -434,6 +433,36 @@ public class Main extends AppCompatActivity
         editor.commit();
         startActivity(new Intent(Main.this,Login.class));
         finish();
+    }
+
+
+    //function to simulate payment
+
+    public void simulatePayment(){
+        final Dialog dialog=new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.contribute_dialog);
+        dialog.show();
+
+        final EditText amountInput=(EditText)dialog.findViewById(R.id.amount);
+
+
+        Button ok=(Button)dialog.findViewById(R.id.ok);
+        ok.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                String amountt = amountInput.getText().toString();
+
+                Connection paymentConnection=new Connection();
+                String passer=PAYMENT+userid+"/"+amountt;
+                Toast.makeText(Main.this, passer, Toast.LENGTH_SHORT).show();
+                paymentConnection.execute(passer);
+
+                dialog.dismiss();
+
+            };});
     }
 
 

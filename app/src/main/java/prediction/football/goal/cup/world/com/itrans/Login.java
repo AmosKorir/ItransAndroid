@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static prediction.football.goal.cup.world.com.itrans.Constanst.LOGINURL;
 import static prediction.football.goal.cup.world.com.itrans.Constanst.REGISTERURL;
@@ -60,6 +62,8 @@ public class Login extends AppCompatActivity {
     public void getInput(){
         passwordstr=password.getText().toString().trim();
         phonestr=phone.getText().toString().trim();
+        isPhoneValid(phonestr);
+
 
 
 
@@ -87,11 +91,11 @@ public class Login extends AppCompatActivity {
                         }
 
                         if(output.equals("no")){
-                            progressDialog.dismiss();
-                            //Toast.makeText(this, "Please Check your credentials", Toast.LENGTH_SHORT).show();
+
+                            outputMessage("Please check your details");
                         }else{
                            // Toast.makeText(this, output, Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
+
                     SharedPreferences preferences=getSharedPreferences("login",MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putString("user",output);
@@ -116,5 +120,36 @@ public class Login extends AppCompatActivity {
         }else {
             Toast.makeText(this, "Please Enter both fields", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void outputMessage(String output) {
+        progressDialog.dismiss();
+        Toast.makeText(this, output, Toast.LENGTH_SHORT).show();
+    }
+
+    public void   isPhoneValid(String phone){
+        Pattern pattern = Pattern.compile("^(?:254|\\+254|0)?(7(?:(?:[129][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6})$");
+        Matcher matcher = pattern.matcher(phone);
+        if (matcher.matches()) {
+            phone = "254" + matcher.group(1);
+
+        }else {
+            pattern = Pattern.compile("^(?:254|\\+254|0)?(7(?:(?:[3][0-9])|(?:5[0-6])|(8[5-9]))[0-9]{6})$");
+            matcher = pattern.matcher(phone);
+            if (matcher.matches()) {
+                phone = "254" + matcher.group(1);
+
+            }else {
+                pattern = Pattern.compile("^(?:254|\\+254|0)?(77[0-6][0-9]{6})$");
+                matcher = pattern.matcher(phone);
+                matcher = pattern.matcher(phone);
+                if (matcher.matches()) {
+                    phone = "254" + matcher.group(1);
+
+                }
+            }
+        }
+
+        phonestr=phone;
     }
 }

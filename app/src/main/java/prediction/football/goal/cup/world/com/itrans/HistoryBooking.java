@@ -1,5 +1,6 @@
 package prediction.football.goal.cup.world.com.itrans;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -58,7 +59,7 @@ public class HistoryBooking extends AppCompatActivity {
 
     //create cancel dialog
 
-    public  void createDialog(final Context c, final String ticketcode, final String allocationid, final String userid, final String amount, final String seats, final String date){
+    public  static void createDialog(final Context c, final String ticketcode, final String allocationid, final String userid, final String amount, final String seats, final String date){
         final Dialog dialog=new Dialog(c);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.confirmdelete);
@@ -76,7 +77,7 @@ public class HistoryBooking extends AppCompatActivity {
                connection.execute(CANCELURL+ticketcode+"/"+allocationid+"/"+userid+"/"+amount+"/"+seats+"/"+date);
                 Toast.makeText(c, CANCELURL+ticketcode+"/"+allocationid+"/"+userid+"/"+amount+"/"+seats+"/"+date, Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
-                fetchData();
+
 
                
 

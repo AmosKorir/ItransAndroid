@@ -65,9 +65,13 @@ public class Details extends AppCompatActivity {
                 Connection connection=new Connection();
                 try {
                     String phone=getUserPhone();
-                    String result =connection.execute(CUSTOMERDETAILS+"/"+phone+"/"+fname+"/"+lname+"/"+snationalid+"/"+sgender+"/"+city).get();
+                    Toast.makeText(Details.this, phone, Toast.LENGTH_SHORT).show();
+                    String parser=CUSTOMERDETAILS+phone+"/"+fname+"/"+lname+"/"+snationalid+"/"+sgender+"/"+scity;
+                    nationalid.setText(parser);
+                    String result =connection.execute(parser).get();
                     Toast.makeText(Details.this, result, Toast.LENGTH_SHORT).show();
                 }catch (Exception e){
+                    Toast.makeText(Details.this, e+"", Toast.LENGTH_SHORT).show();
 
                 }
                 progressDialog.dismiss();
